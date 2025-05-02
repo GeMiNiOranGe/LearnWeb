@@ -1,4 +1,5 @@
 import { PageNotFoundError } from "./error.js";
+import { setupHomePage } from "./setup-home-page.js";
 
 /**
  * @param {string} page 
@@ -19,9 +20,13 @@ async function navigateTo(page) {
     }
 }
 
-function handleNavigation() {
+async function handleNavigation() {
     const page = location.hash.replace('#', '') || 'home';
-    navigateTo(page);
+    await navigateTo(page);
+
+    if (page === 'home') {
+        setupHomePage();
+    }
 }
 
 window.addEventListener('hashchange', handleNavigation);
