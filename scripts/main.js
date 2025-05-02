@@ -1,23 +1,30 @@
-import { PageNotFoundError } from "./error.js";
-import { setupHomePage } from "../pages/home/script.js";
+import { PageNotFoundError } from './error.js';
+import { getErrorMessage } from './utilities.js';
+import { setupHomePage } from '../pages/home/script.js';
 
 /**
  * @param {string} page 
  */
 async function navigateTo(page) {
+    let content = '';
+
     try {
         const res = await fetch(`pages/${page}`);
         if (!res.ok) {
             throw new PageNotFoundError();
         }
 
-        const html = await res.text();
-        document.getElementById('app').innerHTML = html;
+        content = await res.text();
     } catch (err) {
         if (err instanceof PageNotFoundError) {
-            document.getElementById('app').innerHTML = `<h2>404 - ${err.message}</h2>`;
+            content = `<h2>404 - ${err.message}</h2>`;
+        }
+        else {
+            content = `<h2>Error - ${getErrorMessage(err)}</h2>`;
         }
     }
+
+    document.getElementById('app').innerHTML = content;
 }
 
 async function handleNavigation() {
