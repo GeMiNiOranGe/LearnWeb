@@ -1,12 +1,12 @@
 import { PageNotFoundError } from "./error.js";
-import { setupHomePage } from "./setup-home-page.js";
+import { setupHomePage } from "../pages/home/script.js";
 
 /**
  * @param {string} page 
  */
 async function navigateTo(page) {
     try {
-        const res = await fetch(`pages/${page}.html`);
+        const res = await fetch(`pages/${page}`);
         if (!res.ok) {
             throw new PageNotFoundError();
         }
