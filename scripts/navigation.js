@@ -27,7 +27,7 @@ async function navigateTo(page) {
     document.getElementById('app').innerHTML = content;
 }
 
-async function handleNavigation() {
+export async function handleNavigation() {
     const page = location.hash.replace('#', '') || 'home';
     await navigateTo(page);
 
@@ -35,6 +35,3 @@ async function handleNavigation() {
         setupHomePage();
     }
 }
-
-window.addEventListener('hashchange', handleNavigation);
-window.addEventListener('load', handleNavigation);
