@@ -3,7 +3,7 @@ import { getErrorMessage } from './utilities.js';
 import { setupHomePage } from '../pages/home/script.js';
 
 /**
- * @param {string} page 
+ * @param {string} page
  */
 async function navigateTo(page) {
     let content = '';
@@ -18,8 +18,7 @@ async function navigateTo(page) {
     } catch (err) {
         if (err instanceof PageNotFoundError) {
             content = `<h2>404 - ${err.message}</h2>`;
-        }
-        else {
+        } else {
             content = `<h2>Error - ${getErrorMessage(err)}</h2>`;
         }
     }

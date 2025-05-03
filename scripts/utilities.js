@@ -1,5 +1,5 @@
 /**
- * @param {unknown} error 
+ * @param {unknown} error
  */
 export function getErrorMessage(error) {
     if (error instanceof Error) {

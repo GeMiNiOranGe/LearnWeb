@@ -9,9 +9,11 @@ export function setupHomePage() {
     const amount = 5;
     const messages = Array(amount).fill('Hello world');
 
-    const homePageInner = messages.map(value => `
-        <h1>${value}</h1>
-    `);
+    const homePageInner = messages.map(
+        value => `
+            <h1>${value}</h1>
+        `,
+    );
 
     homePage.innerHTML = homePageInner.join('');
 }
