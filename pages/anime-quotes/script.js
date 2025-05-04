@@ -6,7 +6,7 @@ import { ANIMECHAN_BASE_URL } from '../../scripts/config.js';
  * @property {{
  *   id: number;
  *   name: string;
- *   altName: string;
+ *   altName: string | null;
  * }} anime
  * @property {{
  *   id: number;
@@ -33,15 +33,21 @@ export async function setupAnimeQuotesPage() {
     /** @type {AnimechanQuote} */
     const quote = await response.json();
 
-    document.getElementById(
-        'anime-quotes-content',
-    ).innerHTML = `"${quote.data.content}"`;
+    const loader = animeQuotesPage.querySelector('.loader');
 
-    document.getElementById(
-        'anime-quotes-character',
-    ).innerHTML = `- ${quote.data.character.name}`;
+    if (loader) {
+        animeQuotesPage.removeChild(loader);
+    }
 
-    document.getElementById(
-        'anime-quotes-anime',
-    ).innerHTML = `${quote.data.anime.name} (${quote.data.anime.altName})`;
+    const alternativeName = quote.data.anime.altName
+        ? ` (${quote.data.anime.altName})`
+        : '';
+
+    animeQuotesPage.innerHTML = `
+        <div>
+            <p id="anime-quotes-content">"${quote.data.content}"</p>
+            <p id="anime-quotes-character">- ${quote.data.character.name}</p>
+            <p id="anime-quotes-anime">${quote.data.anime.name}${alternativeName}</p>
+        </div>
+    `;
 }
