@@ -39,15 +39,17 @@ export async function setupAnimeQuotesPage() {
         animeQuotesPage.removeChild(loader);
     }
 
-    const alternativeName = quote.data.anime.altName
-        ? ` (${quote.data.anime.altName})`
-        : '';
+    const alternativeName =
+        quote.data.anime.altName &&
+        quote.data.anime.name !== quote.data.anime.altName
+            ? ` (${quote.data.anime.altName})`
+            : '';
 
     animeQuotesPage.innerHTML = `
         <div>
-            <p id="anime-quotes-content">"${quote.data.content}"</p>
-            <p id="anime-quotes-character">- ${quote.data.character.name}</p>
-            <p id="anime-quotes-anime">${quote.data.anime.name}${alternativeName}</p>
+            <q id="anime-quotes-page__content">${quote.data.content}</q>
+            <p id="anime-quotes-page__character">- ${quote.data.character.name}</p>
+            <p id="anime-quotes-page__anime">${quote.data.anime.name}${alternativeName}</p>
         </div>
     `;
 }
