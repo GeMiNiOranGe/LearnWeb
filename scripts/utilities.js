@@ -13,3 +13,10 @@ export function getErrorMessage(error) {
     }
     return 'Something went wrong';
 }
+
+/**
+ * @param {unknown} error
+ */
+export function isNetworkError(error) {
+    return error instanceof TypeError && error.message === 'Failed to fetch';
+}

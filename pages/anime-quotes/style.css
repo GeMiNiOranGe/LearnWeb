@@ -9,17 +9,19 @@
     font-size: 2rem;
 }
 
-#anime-quotes-page__character {
+#anime-quotes-page__character,
+#anime-quotes-page__anime {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 1.5rem;
     text-align: end;
-    margin: 1.5rem 0 0.5rem 0;
+}
+
+#anime-quotes-page__character {
+    font-size: 1.5rem;
+    margin: 2rem 0 0.5rem 0;
 }
 
 #anime-quotes-page__anime {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 1rem;
-    text-align: end;
     margin: 0;
 }
 

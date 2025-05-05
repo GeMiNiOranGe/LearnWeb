@@ -1,4 +1,7 @@
 import { ANIMECHAN_BASE_URL } from '../../scripts/config.js';
+import { NETWORK_ERROR_MESSAGE } from '../../scripts/constants.js';
+import { AnimeQuoteRateLimitError } from '../../scripts/error.js';
+import { getErrorMessage, isNetworkError } from '../../scripts/utilities.js';
 
 /**
  * @typedef {Object} AnimechanQuoteData
@@ -28,28 +31,33 @@ export async function setupAnimeQuotesPage() {
         return;
     }
 
-    const response = await fetch(`${ANIMECHAN_BASE_URL}/quotes/random`);
+    try {
+        const response = await fetch(`${ANIMECHAN_BASE_URL}/quotes/random`);
 
-    /** @type {AnimechanQuote} */
-    const quote = await response.json();
+        if (response.status === 429) {
+            throw new AnimeQuoteRateLimitError();
+        }
 
-    const loader = animeQuotesPage.querySelector('.loader');
+        /** @type {AnimechanQuote} */
+        const quote = await response.json();
 
-    if (loader) {
-        animeQuotesPage.removeChild(loader);
+        const alternativeName =
+            quote.data.anime.altName &&
+            quote.data.anime.name !== quote.data.anime.altName
+                ? ` (${quote.data.anime.altName})`
+                : '';
+
+        animeQuotesPage.innerHTML = `
+            <div>
+                <q id="anime-quotes-page__content">${quote.data.content}</q>
+                <p id="anime-quotes-page__character">- ${quote.data.character.name}</p>
+                <p id="anime-quotes-page__anime">${quote.data.anime.name}${alternativeName}</p>
+            </div>
+        `;
+    } catch (error) {
+        const message = isNetworkError(error)
+            ? NETWORK_ERROR_MESSAGE
+            : getErrorMessage(error);
+        animeQuotesPage.innerHTML = `<p id="anime-quotes-page__content">${message}</p>`;
     }
-
-    const alternativeName =
-        quote.data.anime.altName &&
-        quote.data.anime.name !== quote.data.anime.altName
-            ? ` (${quote.data.anime.altName})`
-            : '';
-
-    animeQuotesPage.innerHTML = `
-        <div>
-            <q id="anime-quotes-page__content">${quote.data.content}</q>
-            <p id="anime-quotes-page__character">- ${quote.data.character.name}</p>
-            <p id="anime-quotes-page__anime">${quote.data.anime.name}${alternativeName}</p>
-        </div>
-    `;
 }

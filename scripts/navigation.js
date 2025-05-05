@@ -16,11 +16,11 @@ async function navigateTo(page) {
         }
 
         content = await res.text();
-    } catch (err) {
-        if (err instanceof PageNotFoundError) {
-            content = `<h2>404 - ${err.message}</h2>`;
+    } catch (error) {
+        if (error instanceof PageNotFoundError) {
+            content = `<h2>404 - ${error.message}</h2>`;
         } else {
-            content = `<h2>Error - ${getErrorMessage(err)}</h2>`;
+            content = `<h2>Error - ${getErrorMessage(error)}</h2>`;
         }
     }
 
