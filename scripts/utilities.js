@@ -1,4 +1,4 @@
-import { GOOGLE_SEARCH_URL } from './config.js';
+import { GOOGLE_SEARCH_URL } from '/scripts/config.js';
 
 /**
  * @param {unknown} error
@@ -26,7 +26,7 @@ export function isNetworkError(error) {
 /**
  * @template {keyof HTMLElementTagNameMap} K
  * @param {K} tagName
- * @param {HTMLElementTagNameMap[K]} props
+ * @param {Partial<HTMLElementTagNameMap[K]>} props
  * @param {(Node | string)[]} children
  * @returns {HTMLElementTagNameMap[K]}
  */

@@ -1,12 +1,12 @@
-import { ANIMECHAN_BASE_URL } from '../../scripts/config.js';
-import { NETWORK_ERROR_MESSAGE } from '../../scripts/constants.js';
-import { AnimeQuoteRateLimitError } from '../../scripts/error.js';
+import { ANIMECHAN_BASE_URL } from '/scripts/config.js';
+import { NETWORK_ERROR_MESSAGE } from '/scripts/constants.js';
+import { AnimeQuoteRateLimitError } from '/scripts/error.js';
 import {
     buildGoogleSearchUrl,
     getErrorMessage,
     html,
     isNetworkError,
-} from '../../scripts/utilities.js';
+} from '/scripts/utilities.js';
 
 /**
  * @typedef {Object} AnimechanQuoteData
@@ -29,8 +29,9 @@ import {
  */
 
 export async function setupAnimeQuotesPage() {
-    /** @type {HTMLDivElement | null} */
-    const animeQuotesPage = document.getElementById('anime-quotes-page');
+    const animeQuotesPage = /** @type {HTMLDivElement | null} */ (
+        document.getElementById('anime-quotes-page')
+    );
 
     if (!animeQuotesPage) {
         return;

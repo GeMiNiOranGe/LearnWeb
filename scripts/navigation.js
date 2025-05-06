@@ -1,7 +1,7 @@
-import { PageNotFoundError } from './error.js';
-import { getErrorMessage } from './utilities.js';
-import { setupHomePage } from '../pages/home/script.js';
-import { setupAnimeQuotesPage } from '../pages/anime-quotes/script.js';
+import { PageNotFoundError } from '/scripts/error.js';
+import { getErrorMessage } from '/scripts/utilities.js';
+import { setupHomePage } from '/pages/home/script.js';
+import { setupAnimeQuotesPage } from '/pages/anime-quotes/script.js';
 
 /**
  * @param {string} page

@@ -1,6 +1,7 @@
 export function setupHomePage() {
-    /** @type {HTMLDivElement | null} */
-    const homePage = document.getElementById('home-page');
+    const homePage = /** @type {HTMLDivElement | null} */ (
+        document.getElementById('home-page')
+    );
 
     if (!homePage) {
         return;
