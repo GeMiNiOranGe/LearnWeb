@@ -1,7 +1,7 @@
 import { PageNotFoundError } from '/scripts/error.js';
 import { getErrorMessage } from '/scripts/utilities.js';
 import { setupHomePage } from '/pages/home/script.js';
-import { setupAnimeQuotesPage } from '/pages/anime-quotes/script.js';
+import { setupAnimeQuotePage } from '/pages/anime-quote/script.js';
 
 /**
  * @param {string} page
@@ -35,7 +35,7 @@ export async function handleNavigation() {
         setupHomePage();
     }
 
-    if (page === 'anime-quotes') {
-        await setupAnimeQuotesPage();
+    if (page === 'anime-quote') {
+        await setupAnimeQuotePage();
     }
 }

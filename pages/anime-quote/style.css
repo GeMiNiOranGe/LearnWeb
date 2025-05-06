@@ -1,41 +1,41 @@
-#anime-quotes-page.page-container {
+#anime-quote-page.page-container {
     justify-content: center;
     align-items: center;
     padding: 0 10vw;
 }
 
-#anime-quotes-page__content {
+#anime-quote-page__content {
     font-family: sans-serif;
     font-size: 2rem;
 }
 
-#anime-quotes-page__character,
-#anime-quotes-page__anime {
+#anime-quote-page__character,
+#anime-quote-page__anime {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: end;
 }
 
-#anime-quotes-page__character {
+#anime-quote-page__character {
     font-size: 1.5rem;
     margin: 2rem 0 0.5rem 0;
 }
 
-#anime-quotes-page__anime {
+#anime-quote-page__anime {
     font-size: 1rem;
     margin: 0;
 }
 
-.anime-quotes-page__link {
+.anime-quote-page__link {
     text-decoration: none;
     color: black;
     transition: color 0.3s ease;
 }
 
-.anime-quotes-page__link:hover {
+.anime-quote-page__link:hover {
     text-decoration: underline;
 }
 
-.anime-quotes-footer {
+.anime-quote-footer {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;

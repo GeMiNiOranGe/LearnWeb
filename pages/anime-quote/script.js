@@ -28,12 +28,12 @@ import {
  * @property {AnimechanQuoteData} data
  */
 
-export async function setupAnimeQuotesPage() {
-    const animeQuotesPage = /** @type {HTMLDivElement | null} */ (
-        document.getElementById('anime-quotes-page')
+export async function setupAnimeQuotePage() {
+    const animeQuotePage = /** @type {HTMLDivElement | null} */ (
+        document.getElementById('anime-quote-page')
     );
 
-    if (!animeQuotesPage) {
+    if (!animeQuotePage) {
         return;
     }
 
@@ -56,13 +56,13 @@ export async function setupAnimeQuotesPage() {
         const container = html(
             'div',
             undefined,
-            html('q', { id: 'anime-quotes-page__content' }, content),
+            html('q', { id: 'anime-quote-page__content' }, content),
             html(
                 'p',
-                { id: 'anime-quotes-page__character' },
+                { id: 'anime-quote-page__character' },
                 '- ',
                 html('a', {
-                    className: 'anime-quotes-page__link',
+                    className: 'anime-quote-page__link',
                     href: buildGoogleSearchUrl(character.name),
                     target: '_blank',
                     rel: 'noopener noreferrer',
@@ -71,9 +71,9 @@ export async function setupAnimeQuotesPage() {
             ),
             html(
                 'p',
-                { id: 'anime-quotes-page__anime' },
+                { id: 'anime-quote-page__anime' },
                 html('a', {
-                    className: 'anime-quotes-page__link',
+                    className: 'anime-quote-page__link',
                     href: buildGoogleSearchUrl(anime.altName || anime.name),
                     target: '_blank',
                     rel: 'noopener noreferrer',
@@ -82,14 +82,14 @@ export async function setupAnimeQuotesPage() {
             ),
         );
 
-        animeQuotesPage.replaceChildren(container);
+        animeQuotePage.replaceChildren(container);
     } catch (error) {
         const message = isNetworkError(error)
             ? NETWORK_ERROR_MESSAGE
             : getErrorMessage(error);
 
-        animeQuotesPage.replaceChildren(
-            html('p', { id: 'anime-quotes-page__content' }, message),
+        animeQuotePage.replaceChildren(
+            html('p', { id: 'anime-quote-page__content' }, message),
         );
     }
 }
