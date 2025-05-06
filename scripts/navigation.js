@@ -1,7 +1,7 @@
-import { PageNotFoundError } from './error.js';
-import { getErrorMessage } from './utilities.js';
-import { setupHomePage } from '../pages/home/script.js';
-import { setupAnimeQuotesPage } from '../pages/anime-quotes/script.js';
+import { PageNotFoundError } from '/scripts/error.js';
+import { getErrorMessage } from '/scripts/utilities.js';
+import { setupHomePage } from '/pages/home/script.js';
+import { setupAnimeQuotePage } from '/pages/anime-quote/script.js';
 
 /**
  * @param {string} page
@@ -16,11 +16,11 @@ async function navigateTo(page) {
         }
 
         content = await res.text();
-    } catch (err) {
-        if (err instanceof PageNotFoundError) {
-            content = `<h2>404 - ${err.message}</h2>`;
+    } catch (error) {
+        if (error instanceof PageNotFoundError) {
+            content = `<h2>404 - ${error.message}</h2>`;
         } else {
-            content = `<h2>Error - ${getErrorMessage(err)}</h2>`;
+            content = `<h2>Error - ${getErrorMessage(error)}</h2>`;
         }
     }
 
@@ -35,7 +35,7 @@ export async function handleNavigation() {
         setupHomePage();
     }
 
-    if (page === 'anime-quotes') {
-        await setupAnimeQuotesPage();
+    if (page === 'anime-quote') {
+        await setupAnimeQuotePage();
     }
 }
