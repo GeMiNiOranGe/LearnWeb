@@ -1,7 +1,12 @@
 import { ANIMECHAN_BASE_URL } from '../../scripts/config.js';
 import { NETWORK_ERROR_MESSAGE } from '../../scripts/constants.js';
 import { AnimeQuoteRateLimitError } from '../../scripts/error.js';
-import { getErrorMessage, isNetworkError } from '../../scripts/utilities.js';
+import {
+    buildGoogleSearchUrl,
+    getErrorMessage,
+    html,
+    isNetworkError,
+} from '../../scripts/utilities.js';
 
 /**
  * @typedef {Object} AnimechanQuoteData
@@ -40,24 +45,50 @@ export async function setupAnimeQuotesPage() {
 
         /** @type {AnimechanQuote} */
         const quote = await response.json();
+        const { content, character, anime } = quote.data;
 
         const alternativeName =
-            quote.data.anime.altName &&
-            quote.data.anime.name !== quote.data.anime.altName
-                ? ` (${quote.data.anime.altName})`
+            anime.altName && anime.name !== anime.altName
+                ? ` (${anime.altName})`
                 : '';
 
-        animeQuotesPage.innerHTML = `
-            <div>
-                <q id="anime-quotes-page__content">${quote.data.content}</q>
-                <p id="anime-quotes-page__character">- ${quote.data.character.name}</p>
-                <p id="anime-quotes-page__anime">${quote.data.anime.name}${alternativeName}</p>
-            </div>
-        `;
+        const container = html(
+            'div',
+            undefined,
+            html('q', { id: 'anime-quotes-page__content' }, content),
+            html(
+                'p',
+                { id: 'anime-quotes-page__character' },
+                '- ',
+                html('a', {
+                    className: 'anime-quotes-page__link',
+                    href: buildGoogleSearchUrl(character.name),
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    textContent: character.name,
+                }),
+            ),
+            html(
+                'p',
+                { id: 'anime-quotes-page__anime' },
+                html('a', {
+                    className: 'anime-quotes-page__link',
+                    href: buildGoogleSearchUrl(anime.altName || anime.name),
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    textContent: `${anime.name}${alternativeName}`,
+                }),
+            ),
+        );
+
+        animeQuotesPage.replaceChildren(container);
     } catch (error) {
         const message = isNetworkError(error)
             ? NETWORK_ERROR_MESSAGE
             : getErrorMessage(error);
-        animeQuotesPage.innerHTML = `<p id="anime-quotes-page__content">${message}</p>`;
+
+        animeQuotesPage.replaceChildren(
+            html('p', { id: 'anime-quotes-page__content' }, message),
+        );
     }
 }

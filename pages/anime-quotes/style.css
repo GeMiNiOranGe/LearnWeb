@@ -25,6 +25,16 @@
     margin: 0;
 }
 
+.anime-quotes-page__link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.anime-quotes-page__link:hover {
+    text-decoration: underline;
+}
+
 .anime-quotes-footer {
     display: flex;
     justify-content: center;
