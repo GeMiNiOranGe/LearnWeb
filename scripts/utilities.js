@@ -1,4 +1,4 @@
-import { GOOGLE_SEARCH_URL } from '/scripts/config.js';
+import { GOOGLE_SEARCH_URL } from "./config.js";
 
 /**
  * @param {unknown} error

@@ -1,9 +1,5 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "/*": ["./*"]
-        },
         "target": "ES6",
         "lib": ["ES2021", "DOM"],
         "checkJs": true
